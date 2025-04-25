@@ -1,10 +1,6 @@
 import pygame
-from main import HEIGHT
 from neural_network import NeuralNetwork
-
-GRAVITY = 0.75
-MAX_VELOCITY = 19
-JUMP_VELOCITY = -13
+from constants import HEIGHT, JUMP_VELOCITY, MAX_VELOCITY, GRAVITY
 
 class Player:
     def __init__(self, x: int, y: int, width: int, height: int):
@@ -14,7 +10,7 @@ class Player:
         self.height = height
         self.vspeed = 0
         self.color = (0, 0, 0)
-        self.outputs = [0.0]
+        self.outputs = [0.0, 0.0]
         self.neural_network = NeuralNetwork(2, 10, 1)
 
     def update(self):
