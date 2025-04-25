@@ -16,22 +16,24 @@ player = {
     "y": 100,
     "width": 64,
     "height": 64,
-    "color": BLACK
+    "color": BLACK,
+    "vspeed": 0
 }
 
 def handle_keys():
     keys = pygame.key.get_pressed()
-    if keys[pygame.K_LEFT]:
-        player["x"] -= 5
-    if keys[pygame.K_RIGHT]:
-        player["x"] += 5
-    if keys[pygame.K_UP]:
-        player["y"] -= 5
-    if keys[pygame.K_DOWN]:
-        player["y"] += 5
+    if keys[pygame.K_SPACE]:
+        player["vspeed"] = -13
 
 def draw_screen():
+    screen.fill(WHITE)
     pygame.draw.rect(screen, player["color"], (player["x"], player["y"], player["width"], player["height"]))
+    pygame.display.update()
+    clock.tick(60)
+
+def update_player():
+    player["vspeed"] += 0.75
+    player["y"] += player["vspeed"]
 
 while True:
     # Handle events
@@ -42,7 +44,5 @@ while True:
 
     # Game logic
     handle_keys()
-    screen.fill(WHITE)
+    update_player()
     draw_screen()
-    pygame.display.update()
-    clock.tick(60)
